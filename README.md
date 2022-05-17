@@ -51,8 +51,36 @@ The additional parameters of a strict meter format and rhyme scheme only give a 
 
 
 ## Problem Statements
-Using this framework I came up with 3 pr
-### Data Source, Formatting, and Cleaning
+Using this framework I came up with 3 problem statements.
+1. Can a GAN which is normally used to generate images of a fixed size, be used to generate poetry of a fixed size?
+2. Can such a GAN learn meter constraints? 
+3. Can such a GAN learn a rhyme scheme?
+
+
+## Data
+#### Character Metadata
+| Key         | Example | Description                                                                                                       |
+|-------------|--------:|-------------------------------------------------------------------------------------------------------------------|
+| index       |    1003 | index of the character                                                                                            |
+| char        |      地 | character                                                                                                         |
+| tone        |      去 | character (tone)[https://en.wikipedia.org/wiki/Four_tones_(Middle_Chinese)] (平: level tone 上: rising tone 去: departing tone 入: entering tone)                              |
+| rime        |      至 | rime (character indicating same finals) from [_Guangyun_](https://en.wikipedia.org/wiki/Guangyun) rime dictionary                                           |
+| ipa         |     dij | Middle Chinese reconstruction in [IPA (International Phonetic Alphabet)](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)                                                 |
+| tone_class  |       H | tone as letter (L: level tone, X: rising tone, H: departing tone, E: entering tone)                               |
+| pinyin      |      dì | Pinyin romanization for modern Mandarin pronunciation                                                                                     |
+| jyutping    |    dei6 | Jyutping romanization for modern Cantonese Pronunciation                                                                                    |
+| hangul      |      지 | Modern Korean Pronunciation                                                                                       |
+| rime_index  |       3 | index of major rime group                                                                                         |
+| meter_class |       0 | Classical Chinese meter is determined by being either 1 for 平 level tone or 0 for 仄 oblique tone (all non-level tones)  |                                                                                 
+#### Poem format
+| additional for hepta- | pentasyllabic |   rhyme  |
+|:---------------------:|:-------------:|:--------:|
+|     ○○                |     ●●○○●     |          |
+|     ●●                |     ○○●●○     |     ✓    |
+|     ●●                |     ○○○●●     |          |
+|     ○○                |     ●●●○○     |     ✓    |
+### Data Source, Formatting, and Cleaning1
+
 
 ### Dictionary Building
 
