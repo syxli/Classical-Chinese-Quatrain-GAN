@@ -120,10 +120,10 @@ Tensorflow GPU wasn't working for me. Although my "image" size was considerably 
 Using LSTM based text prediction, I built a simpler neural network that takes in a sequence of 7 characters and spits out the predicted next character.  To generate a poem, you’d need a seed text of the first line randomly generated or of your choosing. Then you take the last six characters of your seed text and the predicted character and you plug that back in the model until you have 28 characters. Training this model on a CPU took over 8 hours, but because the neural network cannot take into account it's position in the poem, it has no way of learning rhyme and meter. It might be possible to sequentially generate characters using a separate neural network for that specific position in the poem, thus possbibly allowing each network to learn the correct meter class of that position needs. But training and tuning neural networks would still take considerable time.
 
 ## Findings
-Yes, poems and image data superficially similar but with “intensity” comes “complexity”.  Trying to learn tone classes and rimes from nothing takes a lot of training. It is a much simpler to try to find simpler patterns for values between 0-255 for something like edge detection than trying to learn the tone classes and rimes of 7980 characters from scatch. Although LSTMs work much better than simple Dense neurons for language data, they still don't work nearly as well as transformers.
+Yes, poems and image data superficially similar but with “intensity” comes “complexity”.  Trying to learn tone classes and rimes from nothing takes a lot of training. It is a much simpler to try to find simpler patterns for values between 0-255 for something like edge detection than trying to learn the tone classes and rimes of 7980 characters from scatch. Although LSTMs work much better than simple Dense neurons for language data, they still don't work nearly as well as transformers such as BERT or GPT-3.
 
 ## Next Steps
-I do want to try running my GAN at some point, but it would realistically need to be done in the cloud. If I could incorporate 
+I do want to try running my GAN at some point, but it would realistically need to be done in the cloud. If I could use transfomers into the model, it could potentially increase the performace. Once a working model is made, a web app allowing parameters and input could be made.
 
 
 #### Sources
