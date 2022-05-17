@@ -14,9 +14,6 @@
 
 ### Modeling
 
-## Observations
-
-
 ## Next Steps
 
 
