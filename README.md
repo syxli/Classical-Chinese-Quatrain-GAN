@@ -19,7 +19,7 @@ With enough training, a GAN can generate very realistic looking data/images. The
 Classical Chinese *juéjù* 絕句 are [quatrains](https://en.wikipedia.org/wiki/Jueju) of either five or seven syllables popularized in the Tang dynasty. Below is an example of one of the more famous ones.
 
 春曉 Spring Dawn
-孟浩然 Meng Haoran
+[孟浩然 Meng Haoran](https://en.wikipedia.org/wiki/Meng_Haoran)
 
 春眠不覺曉 [spring] [sleep] [not] [aware] [dawn]
 \
@@ -40,14 +40,14 @@ who knows how many flowers fell?
 You might think at this point, why try to use something that normally generates images to generate text? Well, if you look at it from another angle, these quatrains actually resemble images a lot. Take this comparison with the famous MNIST dataset that GAN demonstrations often use.
 
 Quatrain Features:
-* Set dimension (7x4 and 5x4)
+* Set dimension (7&times;4 and 5&times;4)
 * Finite character possibility (characters in training data)
 
 MNIST Features:
 * Set dimension (28x28)
 * Finite pixel intensity (255)
 
-The additional parameters of a strict meter format and rhyme scheme only give a discriminator more parameters to scrutinize the generators creations. In additon, the lack of inflection and loose word order in Chinese means the model doesn’t need to worry much about grammar of the output.
+The additional parameters of a strict meter format and rhyme scheme only give a discriminator more parameters to scrutinize the generator creations. In additon, the lack of inflection and loose word order in Chinese means the model doesn’t need to worry much about grammar of the output.
 
 
 ## Problem Statements
@@ -85,14 +85,38 @@ Above is and example of a type of possible meter for Chinese Quatrains. The whit
 ### Data Source
 Poetry data was from a [Chinese Poetry GitHub repository](https://github.com/chinese-poetry/chinese-poetry) and character metadata was scraped from an [online rime dictionary database](https://ytenx.org/). Modern pronunciations generated courtesy of [pinyin](https://pypi.org/project/pinyin/) (Mandarin), [PyJyutping](https://pypi.org/project/pyjyutping/) (Cantonese), and [hanja](https://pypi.org/project/hanja/) (Korean) Python packages.
 
-### Formatting, and Cleaning
+### Formatting, Cleaning, and Character Dictionary Building
+The initial data is from a collection of .json files containing rough ~300,000 poems of different types from the Tang and Song dynasty. A function was used to determine if an entry was a quatrain, and to clean and add validated quatrains to a DataFrame. The above texts were vectorized using SKlearn CountVectorizer and a character list was generated from it. Non word symbols found here were used to refine the regex used to clean the poetry. Rerunning the quatrain extractor with the updated regex yielded 16785 pentasyllabic poems and 86578 heptasyllabic poems after dropping ~4000 duplicates. Next Beautiful Soup was used to extract the metadata from the online rime dictionary. Modern pronuciations were added and a rime index was added consolidating 208 individual rimes into 16 major rime groups. How this works is the rime is simply everything that comes after the initial consonant, so words with different full rimes might still rhyme because the last few parts of their rime are still the same. An analogy in English would be "spent" and "silent" rhyming, but not in the same way as "silent" and "violent" rhyme more completely. 
 
-
-
-### Dictionary Building
+With the character list I removed around 16000 poems with characters that I didn't have metadata on. These were mostly obscure and/or variant characters that require interpretation. I rated the rest of the poems for rhyme and meter adherence. All the poems rhymed correctly and hade meter adherence of exactly half or complete adherence. I believe this is due to the rules surrounding intentional meter breaks inverting the meter for other parts of the poem. I didn't think it would be wise to try to edit my meter scoring function for these complex rule. I wanted my model to be able to make something, not try to be the next [Li Bai](https://en.wikipedia.org/wiki/Li_Bai) or Shakespeare. After checking the intergrity of my poems, I chose to focus on the 62211 heptasyllabic 7&times;4 poems which comprised the majority of the quatrains.
 
 ### Modeling
+The basic training loop for the GAN looked like this:
+* Generating Poems
+  * Generate random noise in generator input shape
+  * Run noise through generator to produce poems
+* Transform Fake Poems
+  * Add on rhyme and meter scores for fake poems
+* Discriminator Training Phase
+  * Concatenate fake and real poems and assign 1 for real poems and 0 for fake poems to y array
+  * Train discriminator on data
+* Generator Training Phase
+  * Turn off discriminator training
+  * Generate noise and run model
+* Loop
+  * Turn discriminator training back on and run through steps again
 
+### Roadblocks
+Tensorflow GPU wasn't working for me. Although my "image" size was considerably smaller, so was my computing power. For reference, the type of GAN used to generate the above 
+
+| GPUs | 1024&times;1024  | 512&times;512    | 256&times;256    |
+| :--- | :--------------  | :------------    | :------------    |
+| 1    | 41 days 4 hours  | 24 days 21 hours | 14 days 22 hours |
+| 2    | 21 days 22 hours | 13 days 7 hours  | 9 days 5 hours   |
+| 4    | 11 days 8 hours  | 7 days 0 hours   | 4 days 21 hours  |
+| 8    | 6 days 14 hours  | 4 days 10 hours  | 3 days 8 hours   |
+
+Expected training times for the default configuration using Tesla V100 GPUs:
 
 ## Next Steps
 
