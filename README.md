@@ -57,15 +57,15 @@ Using this framework I came up with 3 problem statements.
 3. Can such a GAN learn a rhyme scheme?
 
 
-## Data
+## Data Formats
 #### Character Metadata
 | Key         | Example | Description                                                                                                       |
 |-------------|--------:|-------------------------------------------------------------------------------------------------------------------|
 | index       |    1003 | index of the character                                                                                            |
 | char        |      地 | character                                                                                                         |
 | tone        |      去 | [character tone](https://en.wikipedia.org/wiki/Four_tones_(Middle_Chinese)) (平: level tone 上: rising tone 去: departing tone 入: entering tone)                              |
-| rime        |      至 | rime (character indicating same finals) from [_Guangyun_](https://en.wikipedia.org/wiki/Guangyun) rime dictionary                                           |
-| ipa         |     dij | Middle Chinese reconstruction in [IPA](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)                                                 |
+| rime        |      至 | rime (character indicating same final) from [_Guangyun_](https://en.wikipedia.org/wiki/Guangyun) rime dictionary                                           |
+| ipa         |     dij | Middle Chinese reconstruction in [International Phonetic Alphabet](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet) notation                                                |
 | tone_class  |       H | tone as letter (L: level tone, X: rising tone, H: departing tone, E: entering tone)                               |
 | pinyin      |      dì | Pinyin romanization for modern Mandarin pronunciation                                                                                     |
 | jyutping    |    dei6 | Jyutping romanization for modern Cantonese Pronunciation                                                                                    |
@@ -79,7 +79,14 @@ Using this framework I came up with 3 problem statements.
 |     ●●                |     ○○●●○     |     ✓    |
 |     ●●                |     ○○○●●     |          |
 |     ○○                |     ●●●○○     |     ✓    |
-### Data Source, Formatting, and Cleaning1
+
+Above is and example of a type of possible meter for Chinese Quatrains. The white circles indicate level tones (meter class 1) and the black circles indicate oblique tones (meter class 0) for every position in the poem. 
+
+### Data Source
+Poetry data was from a [Chinese Poetry GitHub repository](https://github.com/chinese-poetry/chinese-poetry) and character metadata was scraped from an [online rime dictionary database](https://ytenx.org/). Modern pronunciations generated courtesy of [pinyin](https://pypi.org/project/pinyin/) (Mandarin), [PyJyutping](https://pypi.org/project/pyjyutping/) (Cantonese), and [hanja](https://pypi.org/project/hanja/) (Korean) Python packages.
+
+### Formatting, and Cleaning
+
 
 
 ### Dictionary Building
@@ -91,8 +98,10 @@ Using this framework I came up with 3 problem statements.
 
 
 #### Sources
-* [Chinese Poetry Github Repository](https://github.com/chinese-poetry/chinese-poetry)
+* [Chinese Poetry GitHub Repository](https://github.com/chinese-poetry/chinese-poetry)
 * [Online Rime Dictionary Database](https://ytenx.org/)
-
+* [pinyin](https://pypi.org/project/pinyin/)
+* [PyJyutping](https://pypi.org/project/pyjyutping/)
+* [hanja](https://pypi.org/project/hanja/)
 
 
