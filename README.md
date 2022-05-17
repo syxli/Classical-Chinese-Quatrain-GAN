@@ -63,9 +63,9 @@ Using this framework I came up with 3 problem statements.
 |-------------|--------:|-------------------------------------------------------------------------------------------------------------------|
 | index       |    1003 | index of the character                                                                                            |
 | char        |      地 | character                                                                                                         |
-| tone        |      去 | character (tone)[https://en.wikipedia.org/wiki/Four_tones_(Middle_Chinese)] (平: level tone 上: rising tone 去: departing tone 入: entering tone)                              |
+| tone        |      去 | [character tone](https://en.wikipedia.org/wiki/Four_tones_(Middle_Chinese)) (平: level tone 上: rising tone 去: departing tone 入: entering tone)                              |
 | rime        |      至 | rime (character indicating same finals) from [_Guangyun_](https://en.wikipedia.org/wiki/Guangyun) rime dictionary                                           |
-| ipa         |     dij | Middle Chinese reconstruction in [IPA (International Phonetic Alphabet)](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)                                                 |
+| ipa         |     dij | Middle Chinese reconstruction in [IPA](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)                                                 |
 | tone_class  |       H | tone as letter (L: level tone, X: rising tone, H: departing tone, E: entering tone)                               |
 | pinyin      |      dì | Pinyin romanization for modern Mandarin pronunciation                                                                                     |
 | jyutping    |    dei6 | Jyutping romanization for modern Cantonese Pronunciation                                                                                    |
